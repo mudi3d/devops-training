@@ -50,6 +50,22 @@ else
 	fi
 fi
 
+git config --global user.name "mudi3d"
+if [ $? -eq 0 ]
+then
+	echo "git config set username: Done" >> ${logfile}
+else
+	echo "git config username: Fail" >> ${logfile}
+fi
+
+git config --global user.email "mscdjkingrock@gmail.com"
+if [ $? -eq 0 ]
+then
+	echo "git config email: Done" >> ${logfile}
+else
+	echo "git config email: Fail" >> ${logfile}
+fi
+
 cd /opt
 ls -l /opt/devops-training
 if [ $? -eq 0 ]

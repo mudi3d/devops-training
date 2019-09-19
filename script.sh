@@ -50,44 +50,20 @@ else
 	fi
 fi
 
-mkdir /opt/devops-training
+cd /opt
+ls -l /opt/devops-training
 if [ $? -eq 0 ]
 then
-        echo "Create git repo dir [/opt/devops-training]: Done" >> ${logfile}
+	echo "git repository already there: Bypass" >> ${logfile}
 else
-        echo "Create git repo dir [/opt/devops-training]: Fail" >> ${logfile}
-fi
-
-cd /opt/devops-training
-if [ $? -eq 0 ]
-then
-        echo "Change directory to [/opt/devops-training]: Done" >> ${logfile}
-else
-        echo "Change directory to [/opt/devops-training]: Fail" >> ${logfile}
-fi
-
-git init
-if [ $? -eq 0 ]
-then
-        echo "git init: Done" >> ${logfile}
-else
-        echo "git init: Fail" >> ${logfile}
-fi
-
-git remote add origin https://github.com/mudi3d/devops-training.git
-if [ $? -eq 0 ]
-then
-        echo "git remote add origin: Done" >> ${logfile}
-else
-        echo "git remote add origin: Fail" >> ${logfile}
-fi
-
-wget https://raw.githubusercontent.com/mudi3d/devops-training/master/script.sh
-if [ $? -eq 0 ]
-then
-        echo "Download script from github: Done" >> ${logfile}
-else
-        echo "Download script from github: Fail" >> ${logfile}
+	git clone https://github.com/mudi3d/devops-training.git
+	ls -l /opt/devops-training
+	if [ $? -eq 0 ]
+        then
+                echo "git clone: Done" >> ${logfile}
+        else
+                echo "git clone: Fail" >> ${logfile}
+        fi
 fi
 
 java -version
@@ -105,7 +81,7 @@ else
         fi
 fi
 
-wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
+wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
 if [ $? -eq 0 ]
 then
         echo "Download Jenkins repo: Done" >> ${logfile}
@@ -113,7 +89,7 @@ else
         echo "Download Jenkins repo: Fail" >> ${logfile}
 fi
 
-rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 if [ $? -eq 0 ]
 then
         echo "Import key from Jenkins: Done" >> ${logfile}

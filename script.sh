@@ -53,7 +53,7 @@ fi
 git config --global user.name "mudi3d"
 if [ $? -eq 0 ]
 then
-	echo "git config set username: Done" >> ${logfile}
+	echo "git config username: Done" >> ${logfile}
 else
 	echo "git config username: Fail" >> ${logfile}
 fi
